@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "title": "UNO Card Images Collection",
+    "version": "1.0.0",
+    "total_cards": 53,
+    "format": "JPEG"
+  },
+  "cards": {
+    "red": {
+      "color": "red",
+      "path": "cards/red",
+      "numbers": [
+        { "value": "0", "file": "cards/red/0.jpg" },
+        { "value": "1", "file": "cards/red/1.jpg" },
+        { "value": "2", "file": "cards/red/2.jpg" },
+        { "value": "3", "file": "cards/red/3.jpg" },
+        { "value": "4", "file": "cards/red/4.jpg" },
+        { "value": "5", "file": "cards/red/5.jpg" },
+        { "value": "6", "file": "cards/red/6.jpg" },
+        { "value": "7", "file": "cards/red/7.jpg" },
+        { "value": "8", "file": "cards/red/8.jpg" },
+        { "value": "9", "file": "cards/red/9.jpg" }
+      ],
+      "actions": [
+        { "type": "skip", "file": "cards/red/skip.jpg" },
+        { "type": "draw-2", "file": "cards/red/draw-2.jpg" }
+      ]
+    },
+    "blue": {
+      "color": "blue",
+      "path": "cards/blue",
+      "numbers": [
+        { "value": "0", "file": "cards/blue/0.jpg" },
+        { "value": "1", "file": "cards/blue/1.jpg" },
+        { "value": "2", "file": "cards/blue/2.jpg" },
+        { "value": "3", "file": "cards/blue/3.jpg" },
+        { "value": "4", "file": "cards/blue/4.jpg" },
+        { "value": "5", "file": "cards/blue/5.jpg" },
+        { "value": "6", "file": "cards/blue/6.jpg" },
+        { "value": "7", "file": "cards/blue/7.jpg" },
+        { "value": "8", "file": "cards/blue/8.jpg" },
+        { "value": "9", "file": "cards/blue/9.jpg" }
+      ],
+      "actions": [
+        { "type": "skip", "file": "cards/blue/skip.jpg" }
+      ]
+    },
+    "green": {
+      "color": "green",
+      "path": "cards/green",
+      "numbers": [
+        { "value": "0", "file": "cards/green/0.jpg" },
+        { "value": "1", "file": "cards/green/1.jpg" },
+        { "value": "2", "file": "cards/green/2.jpg" },
+        { "value": "3", "file": "cards/green/3.jpg" },
+        { "value": "4", "file": "cards/green/4.jpg" },
+        { "value": "5", "file": "cards/green/5.jpg" },
+        { "value": "6", "file": "cards/green/6.jpg" },
+        { "value": "7", "file": "cards/green/7.jpg" },
+        { "value": "8", "file": "cards/green/8.jpg" },
+        { "value": "9", "file": "cards/green/9.jpg" }
+      ],
+      "actions": [
+        { "type": "skip", "file": "cards/green/skip.jpg" },
+        { "type": "draw-2", "file": "cards/green/draw-2.jpg" }
+      ]
+    },
+    "yellow": {
+      "color": "yellow",
+      "path": "cards/yellow",
+      "numbers": [
+        { "value": "0", "file": "cards/yellow/0.jpg" },
+        { "value": "1", "file": "cards/yellow/1.jpg" },
+        { "value": "2", "file": "cards/yellow/2.jpg" },
+        { "value": "3", "file": "cards/yellow/3.jpg" },
+        { "value": "4", "file": "cards/yellow/4.jpg" },
+        { "value": "5", "file": "cards/yellow/5.jpg" },
+        { "value": "6", "file": "cards/yellow/6.jpg" },
+        { "value": "7", "file": "cards/yellow/7.jpg" },
+        { "value": "8", "file": "cards/yellow/8.jpg" },
+        { "value": "9", "file": "cards/yellow/9.jpg" }
+      ],
+      "actions": [
+        { "type": "skip", "file": "cards/yellow/skip.jpg" },
+        { "type": "draw-2", "file": "cards/yellow/draw-2.jpg" }
+      ]
+    },
+    "special": {
+      "path": "cards/special",
+      "cards": [
+        { "type": "wild", "file": "cards/special/wild.jpg", "description": "Can be played on any card, player chooses color" },
+        { "type": "wild-draw-4", "file": "cards/special/wild-draw-4.jpg", "description": "Next player draws 4 cards, current player chooses color" },
+        { "type": "reverse", "color": "blue", "file": "cards/special/reverse-blue.jpg", "description": "Reverses direction of play" },
+        { "type": "reverse", "color": "red", "file": "cards/special/reverse-red.jpg", "description": "Reverses direction of play" },
+        { "type": "reverse", "color": "green", "file": "cards/special/reverse-green.jpg", "description": "Reverses direction of play" },
+        { "type": "reverse", "color": "yellow", "file": "cards/special/reverse-yellow.jpg", "description": "Reverses direction of play" }
+      ]
+    }
+  }
+}
