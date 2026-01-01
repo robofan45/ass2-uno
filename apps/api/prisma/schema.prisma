@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Org {
+  id        String   @id
+  name      String
+  createdAt DateTime @default(now())
+  users     Membership[]
+  projects  Project[]
+}
+
+model User {
+  id        String   @id
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  memberships Membership[]
+}
+
+model Membership {
+  id        String   @id
+  orgId     String
+  userId    String
+  role      String
+  createdAt DateTime @default(now())
+  org       Org      @relation(fields: [orgId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([orgId, userId])
+}
+
+model Project {
+  id        String   @id
+  orgId     String
+  name      String
+  createdAt DateTime @default(now())
+  org       Org      @relation(fields: [orgId], references: [id])
+  workflows Workflow[]
+}
+
+model Workflow {
+  id              String   @id
+  orgId           String
+  projectId       String
+  name            String
+  description     String?
+  draftVersionId  String?
+  publishedVersionId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id])
+  versions WorkflowVersion[]
+}
+
+model WorkflowVersion {
+  id          String   @id
+  workflowId  String
+  orgId       String
+  version     Int
+  status      String   // draft|published|archived
+  graphJson   Json
+  checksum    String
+  createdBy   String
+  createdAt   DateTime @default(now())
+
+  workflow Workflow @relation(fields: [workflowId], references: [id])
+}
+
+model Run {
+  id               String   @id
+  orgId            String
+  workflowVersionId String
+  status           String   // queued|running|waiting_approval|succeeded|failed|canceled
+  triggerInput     Json?
+  context          Json?
+  createdAt        DateTime @default(now())
+  finishedAt       DateTime?
+
+  steps            RunStep[]
+  approvals        ApprovalRequest[]
+}
+
+model RunStep {
+  id        String   @id
+  runId     String
+  orgId     String
+  nodeId    String
+  status    String   // PENDING|RUNNING|SUCCEEDED|FAILED|WAITING_APPROVAL|SKIPPED
+  attempt   Int      @default(0)
+  leaseUntil DateTime?
+  nextRunAt DateTime?
+  input     Json?
+  output    Json?
+  error     Json?
+  startedAt DateTime?
+  finishedAt DateTime?
+
+  run Run @relation(fields: [runId], references: [id])
+
+  @@index([runId, status])
+}
+
+model ApprovalRequest {
+  id        String   @id
+  orgId     String
+  runId     String
+  nodeId    String
+  status    String   // PENDING|APPROVED|REJECTED|EXPIRED
+  message   String
+  scopeJson Json     // allowedNodeIds etc
+  requestedBy String
+  decidedBy String?
+  reason    String?
+  createdAt DateTime @default(now())
+  decidedAt DateTime?
+
+  run Run @relation(fields: [runId], references: [id])
+}
+
+model Secret {
+  id        String   @id
+  orgId     String
+  name      String
+  kind      String   // apiKey|oauthToken|generic
+  encrypted Json
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id
+  orgId     String
+  actorId   String
+  action    String
+  target    String
+  diffJson  Json?
+  reason    String?
+  createdAt DateTime @default(now())
+}
