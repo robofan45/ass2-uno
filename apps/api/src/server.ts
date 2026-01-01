@@ -9,6 +9,7 @@ import { runsRoutes } from "./routes/runs.js";
 import { approvalsRoutes } from "./routes/approvals.js";
 import { secretsRoutes } from "./routes/secrets.js";
 import { webhooksRoutes } from "./routes/webhooks.js";
+import { templatesRoutes } from "./routes/templates.js";
 
 const prisma = new PrismaClient();
 const app = Fastify({ logger: true });
@@ -19,7 +20,7 @@ app.decorateRequest("user", null);
 
 // Auth middleware
 app.addHook("preHandler", async (req: any) => {
-  const openPaths = ["/health", "/auth/signup", "/auth/login"];
+  const openPaths = ["/health", "/auth/signup", "/auth/login", "/templates"];
   if (openPaths.some(p => req.routeOptions.url?.startsWith(p))) return;
 
   const auth = req.headers.authorization;
@@ -64,5 +65,6 @@ await runsRoutes(app, prisma);
 await approvalsRoutes(app, prisma);
 await secretsRoutes(app, prisma);
 await webhooksRoutes(app, prisma);
+await templatesRoutes(app);
 
 app.listen({ port: 4000, host: "0.0.0.0" });
